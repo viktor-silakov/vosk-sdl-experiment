@@ -25,22 +25,12 @@ const micInstance = new SdlMic({
 });
 
 micInstance.on('data', data => {
-  // Разделяем буфер на куски
-  const chunks = [];
-  for (let i = 0; i < data.length; i += BUFFER_SIZE) {
-    chunks.push(data.slice(i, i + BUFFER_SIZE));
-  }
 
-  // Передаем каждый кусок в Vosk
-  chunks.forEach(chunk => {
-    // console.log(chunk.slice(0, 10));
-    
-    if (rec.acceptWaveform(chunk)) {
-      console.log(rec.result());
-    } else {
-      console.log(rec.partialResult());
-    }
-  });
+  if (rec.acceptWaveform(data)) {
+    console.log(rec.result());
+  } else {
+    console.log(rec.partialResult());
+  }
 });
 
 process.on('SIGINT', () => {
