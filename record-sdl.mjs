@@ -1,7 +1,6 @@
 import vosk from 'vosk';
 import fs from 'fs';
 import SdlMic from './sdl-mic.mjs';
-import { format } from 'path';
 
 const MODEL_PATH = 'models/ru_small';
 const SAMPLE_RATE = 16000;
@@ -19,7 +18,8 @@ const rec = new vosk.Recognizer({ model: model, sampleRate: SAMPLE_RATE });
 const micInstance = new SdlMic({
   sampleRate: SAMPLE_RATE,
   channels: 1,
-  deviceIndex: 1, // Укажите нужный индекс устройства или оставьте по умолчанию
+  deviceIndex: 1, // microphone
+  // deviceIndex: 2, // sunflower 2ch
   outputFile: 'recording.wav', // Укажите путь к файлу, если нужна запись в файл
   format: 's16'
 });
